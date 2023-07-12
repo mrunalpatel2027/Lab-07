@@ -8,6 +8,8 @@ Usage:
 """
 import os
 from create_db import db_path, script_dir
+import sqlite3
+from pprint import pprint
 
 def main():
     old_people_list = get_old_people()
@@ -23,6 +25,14 @@ def get_old_people():
         list: (name, age) of old people 
     """
     # TODO: Create function body
+    con = sqlite3.connect('social_network.db')
+    cur = con.cursor()
+    cur.execute('SELECT * FROM people')
+    all_people = cur.fetchall()
+    pprint(all_people)
+    con.commit()
+    con.close()
+
     # Hint: See example code in lab instructions entitled "Getting People Data from the Database"
     return
 
@@ -33,6 +43,8 @@ def print_name_and_age(name_and_age_list):
         name_and_age_list (list): (name, age) of people
     """
     # TODO: Create function body
+
+
     # Hint: Use a for loop to iterate the list of tuples to print a sentence for each old person
     return
 
@@ -44,6 +56,8 @@ def save_name_and_age_to_csv(name_and_age_list, csv_path):
         csv_path (str): Path of CSV file
     """
     # TODO: Create function body
+    
+
     # Hint: In Lab 3, we converted a list of tuples into a pandas DataFrame and saved it to a CSV file
     return
 
